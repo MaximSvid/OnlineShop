@@ -18,6 +18,16 @@ struct ContentView: View {
         }
         .padding()
     }
+    
+    
+    // wir habe TabView3 wie ->login -  homeView -  CardView - favorite
+    
+    // Loge rigester - login - Authorization (view)
+    // Homeview - search - TabsView - Kategorie - wahrenView
+    // CardView -> lsit ( delete - favorite )
+    // favorite ( delete )
+    
+    
 }
 
 #Preview {
