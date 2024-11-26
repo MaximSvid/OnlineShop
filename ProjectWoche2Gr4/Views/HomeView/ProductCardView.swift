@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct ProductCard: View {
-    //var product: Product
+    var product: Product
     
     var body: some View {
         ZStack(alignment: .topTrailing){
