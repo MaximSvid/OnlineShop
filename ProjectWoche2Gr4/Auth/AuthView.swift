@@ -4,33 +4,50 @@ struct AuthView: View {
     @ObservedObject var authViewModel: AuthViewModel
 
     var body: some View {
-        VStack(spacing: 20) {
-            if authViewModel.showRegister {
-                registerView
-            } else {
-                loginView
+        ZStack {
+            // Hintergrundbild
+            Image("backG")
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
+
+            VStack(spacing: 20) {
+                if authViewModel.showRegister {
+                    registerView
+                } else {
+                    loginView
+                }
             }
+            .padding()
+            .background(Color.black.opacity(0.5))
+            .cornerRadius(20)
+            .padding()
         }
-        .padding()
     }
 
     private var loginView: some View {
+     
         VStack(spacing: 20) {
+           
             TextField("Username", text: $authViewModel.usernameInput)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
+                .background(Color.white.opacity(0.8))
+                .cornerRadius(10)
+                .padding(.horizontal)
 
             SecureField("Password", text: $authViewModel.passwordInput)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
+                .background(Color.white.opacity(0.8))
+                .cornerRadius(10)
+                .padding(.horizontal)
 
             Button(action: {
                 authViewModel.login()
             }) {
                 Text("Sign In")
                     .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
+                    .background(Color.white)
+                    .foregroundColor(.black)
                     .cornerRadius(8)
             }
 
@@ -44,7 +61,7 @@ struct AuthView: View {
                 authViewModel.showRegister.toggle()
             }) {
                 Text("Don't have an account? Sign Up")
-                    .foregroundColor(.blue)
+                    .foregroundColor(.white)
             }
         }
     }
@@ -52,20 +69,24 @@ struct AuthView: View {
     private var registerView: some View {
         VStack(spacing: 20) {
             TextField("Username", text: $authViewModel.usernameInput)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
+                .background(Color.white.opacity(0.8))
+                .cornerRadius(10)
+                .padding(.horizontal)
 
             SecureField("Password", text: $authViewModel.passwordInput)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
+                .background(Color.white.opacity(0.8))
+                .cornerRadius(10)
+                .padding(.horizontal)
 
             Button(action: {
                 authViewModel.register()
             }) {
                 Text("Sign Up")
                     .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
+                    .background(Color.white)
+                    .foregroundColor(.black)
                     .cornerRadius(8)
             }
 
@@ -73,7 +94,7 @@ struct AuthView: View {
                 authViewModel.showRegister.toggle()
             }) {
                 Text("Already have an account? Sign In")
-                    .foregroundColor(.blue)
+                    .foregroundColor(.white)
             }
         }
     }
