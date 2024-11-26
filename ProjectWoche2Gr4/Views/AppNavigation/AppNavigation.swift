@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AppNavigation: View {
-    @ObservedObject var authViewModel: AuthViewModel
+    @ObservedObject var authViewModel: AuthViewModel// Hamzah
     @StateObject private var homeViewModel = HomeViewModel()
 
     var body: some View {

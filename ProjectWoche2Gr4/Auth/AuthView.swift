@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct AuthView: View {
-    @ObservedObject var authViewModel: AuthViewModel
+    @ObservedObject var authViewModel: AuthViewModel // das war meine fahler ich habe in AuthWrapper habe auch eine 
 
     var body: some View {
         VStack(spacing: 20) {
