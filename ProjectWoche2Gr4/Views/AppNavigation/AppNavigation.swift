@@ -25,6 +25,10 @@ struct AppNavigation: View {
                 FavoriteView()
             }
             
+            Tab("Setting", systemImage: "gearshape.fill") {
+                SettingView()
+            }
+            
         }
     }
 }
