@@ -12,7 +12,24 @@ class HomeViewModel: ObservableObject {
     @Published var searchText: String = ""
     @Published var isSearchVisible: Bool = false
     @Published var selectedCategory: Bool = false
+    @Published var isLiked: Bool = false
     
+    private var repo: ProductsRepository
+    @Published var products: [Products] = []
     
+    init(repo: ProductsRepository) {
+        self.repo = repo
+    }
+    
+    func getProducts() {
+        Task {
+            do {
+                let fetchedProducts = try await repo.getProducts()
+                self.products = fetchedProducts
+            } catch {
+                print(error)
+            }
+        }
+    }
     
 }

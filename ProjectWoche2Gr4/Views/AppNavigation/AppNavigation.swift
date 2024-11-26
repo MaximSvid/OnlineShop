@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct AppNavigation: View {
-    @StateObject private var homeViewModel = HomeViewModel()
+    @StateObject private var homeViewModel = HomeViewModel(repo:  ProductsRepositoryImplementation())
+    
     
     var body: some View {
         TabView {
