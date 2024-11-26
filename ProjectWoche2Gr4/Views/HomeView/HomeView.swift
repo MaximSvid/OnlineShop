@@ -56,6 +56,14 @@ struct HomeView: View {
                                         .fill(Color.gray.opacity(0.1))
                                     
                                 )
+                                .onTapGesture {
+                                    if homeViewModel.selectedCategory == category {
+                                        homeViewModel.selectedCategory = nil // снимаем выбор
+                                    } else {
+                                        homeViewModel.selectedCategory = category
+                                    }
+                                    homeViewModel.filterByCategory()
+                                }
                             }
                         }
                         .frame(height: 50)

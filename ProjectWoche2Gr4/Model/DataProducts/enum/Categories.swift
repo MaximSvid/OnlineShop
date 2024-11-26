@@ -15,10 +15,11 @@
  */
 
 enum Category: String, CaseIterable {
-    case electronics
-    case jewelry
-    case menClothing
-    case womenClothing
+    case electronics = "electronics"
+        case jewelry = "jewelery"
+        case menClothing = "men's clothing"
+        case womenClothing = "women's clothing"
+
 
     var icon: String {
         switch self {
