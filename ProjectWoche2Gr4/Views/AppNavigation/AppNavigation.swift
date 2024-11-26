@@ -4,11 +4,10 @@
 //
 //  Created by Maxim Svidrak on 25.11.24.
 //
-
 import SwiftUI
 
 struct AppNavigation: View {
-    @ObservedObject var authViewModel: AuthViewModel// Hamzah
+    @ObservedObject var authViewModel: AuthViewModel
     @StateObject private var homeViewModel = HomeViewModel()
 
     var body: some View {
@@ -27,8 +26,8 @@ struct AppNavigation: View {
             }
 
             Tab("Setting", systemImage: "gearshape.fill") {
-                SettingView(user: authViewModel.user)
-            }
+                           SettingView(authViewModel: authViewModel)
+                       }
         }
     }
 }

@@ -29,4 +29,9 @@ class AuthViewModel: ObservableObject { // ich beobachte hier ob der User eingel
         isLoggedIn = true
         loginError = ""
     }
+
+    func logout() {
+        isLoggedIn = false
+        user = nil
+    }
 }
