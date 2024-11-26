@@ -101,3 +101,4 @@ struct ProductCardView: View {
 #Preview {
     ProductCardView(imageName: "image1", title: "Jacke Jack Wolfskin", description: "aasdfkl;jasdflkj ;lkasdfklj assdfsdfasdfasdf;ldkjflk;j lkasdf ", rating: "4.5", price: "$12.00")
 }
+
