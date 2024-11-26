@@ -1,33 +1,24 @@
-//
-//  AuthViewModel.swift
-//  ProjectWoche2Gr4
-//
-//  Created by Hamzah on 26.11.24.
-//
-
 import SwiftUI
 
 @MainActor
-class AuthViewModel: ObservableObject {
+class AuthViewModel: ObservableObject { // ich beobachte hier ob der User eingeloggt ist
     @Published var usernameInput = ""
     @Published var passwordInput = ""
-    @Published var showRegister = false
     @Published var isLoggedIn = false
     @Published var user: User?
+    @Published var loginError: String = ""
 
-    func login(onSuccess: () -> Void) {
-        // Hier richtiger Check für Login
-        if usernameInput == "Admin" && passwordInput == "123" {
-            user = User(username: usernameInput, password: passwordInput)
-            isLoggedIn = true
-            onSuccess()
-        }
+    private var authModel: AuthModel {
+        return AuthModel(username: usernameInput, password: passwordInput)
     }
 
-    func register(onSuccess: () -> Void) {
-        // Hier Registrierung abfertigen
-        user = User(username: usernameInput, password: passwordInput)
-        isLoggedIn = true
-        onSuccess()
+    func login() {
+        if authModel.validateCredentials() {
+            user = User(username: usernameInput, password: passwordInput)
+            isLoggedIn = true
+            loginError = ""
+        } else {
+            loginError = "Invalid username or password"
+        }
     }
 }

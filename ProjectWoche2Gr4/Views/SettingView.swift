@@ -4,6 +4,7 @@
 //
 //  Created by Maxim Svidrak on 26.11.24.
 //
+
 import SwiftUI
 
 struct SettingView: View {
@@ -29,6 +30,6 @@ struct SettingView: View {
 
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingView(user: nil)
+        SettingView()
     }
 }

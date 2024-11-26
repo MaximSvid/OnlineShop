@@ -1,59 +1,40 @@
 import SwiftUI
 
 struct AuthView: View {
-    @StateObject private var authViewModel = AuthViewModel()
+    @ObservedObject var authViewModel: AuthViewModel
 
     var body: some View {
-        VStack {
-            VStack(spacing: 30) {
-                TextField(
-                    "Username",
-                    text: $authViewModel.usernameInput
-                )
-                .textFieldStyle(RoundedBorderTextFieldStyle()) // Hier den Stil angeben
+        VStack(spacing: 20) {
+            TextField("Username", text: $authViewModel.usernameInput)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
 
-                SecureField(
-                    "Password",
-                    text: $authViewModel.passwordInput
-                ).textFieldStyle(RoundedBorderTextFieldStyle()) // Hier den Stil angeben
+            SecureField("Password", text: $authViewModel.passwordInput)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
 
-                if authViewModel.showRegister {
-                    Button {
-                        authViewModel.register {
-                            // Hier kannst du weitere Aktionen nach der Registrierung ausführen
-                        }
-                    } label: {
-                        Text("Register")
-                            .frame(maxWidth: .infinity)
-                    }.buttonStyle(.borderedProminent)
-                        .tint(.black)
-                } else {
-                    Button {
-                        authViewModel.login {
-                            // Hier kannst du weitere Aktionen nach dem Login ausführen
-                        }
-                    } label: {
-                        Text("Login")
-                            .frame(maxWidth: .infinity)
-                    }.buttonStyle(.borderedProminent)
-                        .tint(.black)
-                }
+            Button(action: {
+                authViewModel.login()
+            }) {
+                Text("Sign In")
+                    .padding()
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(8)
+            }
 
-                Button(authViewModel.showRegister ? "Zurück zum Login" : "Hier registrieren") {
-                    authViewModel.showRegister.toggle()
-                }.font(.headline)
-                    .foregroundStyle(.yellow)
-
-            }.padding(40)
+            if !authViewModel.loginError.isEmpty {
+                Text(authViewModel.loginError)
+                    .foregroundColor(.red)
+                    .padding()
+            }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Image("Clouds").blur(radius: 20))
+        .padding()
     }
 }
-
-
-struct preview: PreviewProvider {
-    static var previews: some View {
-        AuthView()
-    }
-}
+//
+//struct AuthView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AuthView()
+//    }
+//}
