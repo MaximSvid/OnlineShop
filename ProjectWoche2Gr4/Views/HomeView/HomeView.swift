@@ -13,7 +13,6 @@ struct HomeView: View {
     let colums = [GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
-        
         NavigationStack {
            
                 ScrollView {
@@ -52,8 +51,11 @@ struct HomeView: View {
                                         .font(.caption)
                                 }
                                 .padding()
-                                .background(.gray.opacity(0.1))
-                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                                .background(
+                                    RoundedRectangle (cornerRadius: 10)
+                                        .fill(Color.gray.opacity(0.1))
+                                    
+                                )
                             }
                         }
                         .frame(height: 50)
@@ -68,7 +70,7 @@ struct HomeView: View {
                     
                     
                     LazyVGrid(columns: colums, spacing: 15) {
-                        ForEach(homeViewModel.products) {product in
+                        ForEach(homeViewModel.filteredProducts) {product in
                             NavigationLink(destination: HomeDetailView()
                                 
                             ) {
@@ -110,7 +112,6 @@ struct HomeView: View {
             }
             .padding([.leading, .trailing])
         }
-    
 }
 
 
