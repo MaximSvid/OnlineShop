@@ -34,15 +34,15 @@ struct CheckoutSheetView: View {
                         .background(Color.black)
                         .cornerRadius(10)
                 }
-                .alert(isPresented: $showAlert) {
-                    Alert(
-                        title: Text("Thank you!"),
-                        message: Text("Thank you for your purchase!"),
-                        dismissButton: .default(Text("OK"), action: {
-                            presentationMode.wrappedValue.dismiss()
-                        })
-                    )
-                }
+//                .alert(isPresented: $showAlert) {
+//                    Alert(
+//                        title: Text("Thank you!"),
+//                        message: Text("Thank you for your purchase!"),
+//                        dismissButton: .default(Text("OK"), action: {
+//                            presentationMode.wrappedValue.dismiss()
+//                        })
+//                    )
+//                }
             }
             .navigationBarTitle("Checkout", displayMode: .inline)
             .navigationBarItems(trailing: Button("Close") {
