@@ -15,5 +15,6 @@ struct AuthModel {
 
     func validateCredentials() -> Bool {
         return username == "123" && password == "123"
+        
     }
 }
