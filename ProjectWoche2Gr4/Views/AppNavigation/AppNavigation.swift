@@ -9,7 +9,6 @@ import SwiftUI
 struct AppNavigation: View {
 
     @ObservedObject var authViewModel: AuthViewModel
-   
 
     @StateObject private var homeViewModel = HomeViewModel(repo:  ProductsRepositoryImplementation())
     
@@ -32,7 +31,7 @@ struct AppNavigation: View {
 
             Tab("Setting", systemImage: "gearshape.fill") {
                            SettingView(authViewModel: authViewModel)
-                       }
+            }
         }
     }
 }

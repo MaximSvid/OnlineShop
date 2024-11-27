@@ -29,7 +29,7 @@ class HomeViewModel: ObservableObject {
         $searchText
                     .debounce(for: .milliseconds(300), scheduler: DispatchQueue.main)
                     .sink { [weak self] _ in
-                        self?.filerProducts()
+                        self?.filterProducts()
                     }
                     .store(in: &cancellables)
        
@@ -47,7 +47,7 @@ class HomeViewModel: ObservableObject {
         }
     }
     
-    func filerProducts() {
+    func filterProducts() {
         if searchText.isEmpty {
             filteredProducts = products
         } else {
