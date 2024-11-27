@@ -21,7 +21,7 @@ struct AppNavigation: View {
             }
 
             Tab("Cart", systemImage: "cart.fill") {
-                CartView()
+                CartView( viewModel: CartViewModel())
             }
             .badge(2)
 
