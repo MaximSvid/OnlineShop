@@ -1,44 +1,35 @@
-//
-//  AppNavigation.swift
-//  ProjectWoche2Gr4
-//
-//  Created by Maxim Svidrak on 25.11.24.
-//
 import SwiftUI
 
 struct AppNavigation: View {
-
     @ObservedObject var authViewModel: AuthViewModel
-
-    @StateObject private var homeViewModel = HomeViewModel(repo:  ProductsRepositoryImplementation())
-    
-    
+    @StateObject private var homeViewModel = HomeViewModel(repo: ProductsRepositoryImplementation())
+    @StateObject private var cartViewModel = CartViewModel()
 
     var body: some View {
         TabView {
             Tab("Home", systemImage: "house.fill") {
-                HomeView(homeViewModel: homeViewModel)
+                HomeView(homeViewModel: homeViewModel, cartViewModel: cartViewModel)
             }
 
             Tab("Cart", systemImage: "cart.fill") {
-                CartView( viewModel: CartViewModel())
+                CartView(cartViewModel: cartViewModel)
             }
-            .badge(2)
+            .badge(cartViewModel.cartItems.count)
 
             Tab("Favorite", systemImage: "star.fill") {
                 FavoriteView()
             }
 
             Tab("Setting", systemImage: "gearshape.fill") {
-                           SettingView(authViewModel: authViewModel)
+                SettingView(authViewModel: authViewModel)
             }
         }
     }
 }
 
-
-struct previews: PreviewProvider {
+struct AppNavigation_Previews: PreviewProvider {
     static var previews: some View {
         AppNavigation(authViewModel: AuthViewModel())
     }
 }
+

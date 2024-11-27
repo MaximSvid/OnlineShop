@@ -1,14 +1,8 @@
-//
-//  HomeView.swift
-//  ProjectWoche2Gr4
-//
-//  Created by Maxim Svidrak on 25.11.24.
-//
-//Test
 import SwiftUI
 
 struct HomeView: View {
     @ObservedObject var homeViewModel: HomeViewModel
+    @ObservedObject var cartViewModel: CartViewModel
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
 
     var body: some View {
@@ -16,7 +10,7 @@ struct HomeView: View {
             ScrollView {
                 BannerView(images: homeViewModel.images)
                 CategoryView(categories: Category.allCases, selectedCategory: $homeViewModel.selectedCategory, filterByCategory: homeViewModel.filterByCategory)
-                ProductGridView(columns: columns, products: homeViewModel.filteredProducts)
+                ProductGridView(columns: columns, products: homeViewModel.filteredProducts, cartViewModel: cartViewModel)
             }
             .toolbar {
                 ToolbarItems(isSearchVisible: $homeViewModel.isSearchVisible, searchText: $homeViewModel.searchText, toggleSearch: { homeViewModel.isSearchVisible.toggle() })
@@ -102,6 +96,7 @@ struct CategoryView: View {
 struct ProductGridView: View {
     let columns: [GridItem]
     let products: [Products]
+    @ObservedObject var cartViewModel: CartViewModel
 
     var body: some View {
         VStack {
@@ -113,7 +108,7 @@ struct ProductGridView: View {
 
             LazyVGrid(columns: columns, spacing: 15) {
                 ForEach(products) { product in
-                    NavigationLink(destination: HomeDetailView(product: product)) {
+                    NavigationLink(destination: HomeDetailView(product: product, cartViewModel: cartViewModel)) {
                         ProductCardView(
                             imageName: product.image,
                             title: product.title,
@@ -155,6 +150,6 @@ struct ToolbarItems: ToolbarContent {
 // Preview
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(homeViewModel: HomeViewModel(repo: ProductsRepositoryImplementation()))
+        HomeView(homeViewModel: HomeViewModel(repo: ProductsRepositoryImplementation()), cartViewModel: CartViewModel())
     }
 }

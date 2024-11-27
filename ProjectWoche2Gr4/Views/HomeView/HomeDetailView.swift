@@ -2,8 +2,8 @@ import SwiftUI
 
 struct HomeDetailView: View {
     @State private var selectedSize: Int? = 40
-    @ObservedObject var viewModel = CartViewModel()
     var product: Products
+    @ObservedObject var cartViewModel: CartViewModel
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -60,9 +60,7 @@ struct HomeDetailView: View {
             // Buttons: "Buy Now" und Warenkorb
             HStack {
                 // "Buy Now" Button links
-                Button(action: {
-                    // Kaufaktion hier einfügen
-                }) {
+                NavigationLink(destination: CartView(cartViewModel: cartViewModel)) {
                     Text("Buy Now")
                         .font(.headline)
                         .foregroundColor(.white)
@@ -75,8 +73,8 @@ struct HomeDetailView: View {
                 Spacer()
 
                 // Warenkorb-Symbol rechts
-                NavigationLink(destination: CartView(viewModel: viewModel).onAppear {
-                    viewModel.addItem(product)
+                Button(action: {
+                    cartViewModel.addItem(product)
                 }) {
                     Image(systemName: "cart.fill")
                         .foregroundColor(.black)
@@ -108,8 +106,7 @@ struct HomeDetailView: View {
 struct HomeDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            HomeDetailView(product: Products(id: 1, title: "Nike Basketball Shoes", price: 272.0, description: "They are a cross between the Air Force 1, the Air Jordan and the Nike Terminator. The first model came out in 1985 and was called Dunk in honour of the players' feats...", category: "Shoes", image: "https://example.com/image.jpg", rating: Rating(rate: 4.6, count: 120)))
+            HomeDetailView(product: Products(id: 1, title: "Nike Basketball Shoes", price: 272.0, description: "They are a cross between the Air Force 1, the Air Jordan and the Nike Terminator. The first model came out in 1985 and was called Dunk in honour of the players' feats...", category: "Shoes", image: "https://example.com/image.jpg", rating: Rating(rate: 4.6, count: 120)), cartViewModel: CartViewModel())
         }
     }
 }
-

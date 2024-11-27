@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct CartView: View {
-    @ObservedObject var viewModel: CartViewModel
+    @ObservedObject var cartViewModel: CartViewModel
+    @State private var showingCheckoutSheet = false
 
     var body: some View {
         VStack {
@@ -15,7 +16,7 @@ struct CartView: View {
             .padding()
 
             // Cart Items
-            ForEach(viewModel.cartItems) { item in
+            ForEach(cartViewModel.cartItems) { item in
                 HStack {
                     AsyncImage(url: URL(string: item.product.image)) { image in
                         image.resizable()
@@ -38,7 +39,7 @@ struct CartView: View {
 
                     HStack {
                         Button(action: {
-                            viewModel.removeItem(item.product)
+                            cartViewModel.removeItem(item.product)
                         }) {
                             Image(systemName: "minus.circle.fill")
                                 .foregroundColor(.black)
@@ -46,7 +47,7 @@ struct CartView: View {
                         Text("\(item.quantity)")
                             .padding(.horizontal, 8)
                         Button(action: {
-                            viewModel.addItem(item.product)
+                            cartViewModel.addItem(item.product)
                         }) {
                             Image(systemName: "plus.circle.fill")
                                 .foregroundColor(.black)
@@ -63,7 +64,7 @@ struct CartView: View {
                 HStack {
                     Text("Subtotal")
                     Spacer()
-                    Text("$\(viewModel.total, specifier: "%.2f")")
+                    Text("$\(cartViewModel.total, specifier: "%.2f")")
                 }
                 HStack {
                     Text("Fee Delivery")
@@ -80,12 +81,12 @@ struct CartView: View {
                     Text("Total")
                         .font(.headline)
                     Spacer()
-                    Text("$\(viewModel.total + 10.70, specifier: "%.2f")")
+                    Text("$\(cartViewModel.total + 10.70, specifier: "%.2f")")
                         .font(.headline)
                 }
 
                 Button(action: {
-                    // Checkout action
+                    showingCheckoutSheet.toggle()
                 }) {
                     Text("Check Out")
                         .foregroundColor(.white)
@@ -102,12 +103,15 @@ struct CartView: View {
             .padding()
         }
         .background(Color.white)
+        .sheet(isPresented: $showingCheckoutSheet) {
+            CheckoutSheetView()
+        }
     }
 }
 
 struct CartView_Previews: PreviewProvider {
     static var previews: some View {
-        CartView(viewModel: CartViewModel())
+        CartView(cartViewModel: CartViewModel())
     }
 }
 
