@@ -11,7 +11,7 @@ import SwiftUI
 struct ProjectWoche2Gr4App: App {
     var body: some Scene {
         WindowGroup {
-            AppNavigation()
+            AuthWrapper()
         }
     }
 }
