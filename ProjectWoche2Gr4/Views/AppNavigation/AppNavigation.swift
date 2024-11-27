@@ -9,7 +9,6 @@ import SwiftUI
 struct AppNavigation: View {
 
     @ObservedObject var authViewModel: AuthViewModel
-//    @StateObject private var homeViewModel = HomeViewModel()
 
     @StateObject private var homeViewModel = HomeViewModel(repo:  ProductsRepositoryImplementation())
     
