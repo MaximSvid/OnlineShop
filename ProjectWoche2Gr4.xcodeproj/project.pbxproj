@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		B513E3EB2CF874070088069A /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = B513E3EA2CF874070088069A /* CodeScanner */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		1584A1032CF4838E00D054C7 /* ProjectWoche2Gr4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectWoche2Gr4.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B513E3EB2CF874070088069A /* CodeScanner in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 			);
 			name = ProjectWoche2Gr4;
 			packageProductDependencies = (
+				B513E3EA2CF874070088069A /* CodeScanner */,
 			);
 			productName = ProjectWoche2Gr4;
 			productReference = 1584A1032CF4838E00D054C7 /* ProjectWoche2Gr4.app */;
@@ -94,6 +100,9 @@
 			);
 			mainGroup = 1584A0FA2CF4838E00D054C7;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				B513E3E92CF874070088069A /* XCRemoteSwiftPackageReference "CodeScanner" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1584A1042CF4838E00D054C7 /* Products */;
 			projectDirPath = "";
@@ -322,6 +331,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B513E3E92CF874070088069A /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B513E3EA2CF874070088069A /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B513E3E92CF874070088069A /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1584A0FB2CF4838E00D054C7 /* Project object */;
 }
