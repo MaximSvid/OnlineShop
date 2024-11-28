@@ -35,7 +35,10 @@ struct CheckoutSheetView: View {
                         .background(Color.black)
                         .cornerRadius(10)
                 }
+
+
             }
+            
             .navigationBarTitle("Checkout", displayMode: .inline)
             .navigationBarItems(trailing: Button("Close") {
                 presentationMode.wrappedValue.dismiss()

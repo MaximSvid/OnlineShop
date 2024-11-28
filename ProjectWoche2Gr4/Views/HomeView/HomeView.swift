@@ -72,8 +72,8 @@ struct CategoryView: View {
                         }
                         .padding()
                         .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.gray.opacity(0.1))
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(selectedCategory == category ? Color.black.opacity(0.3) : Color.gray.opacity(0.1)) // Farbe basierend auf Auswahl
                         )
                         .onTapGesture {
                             if selectedCategory == category {
