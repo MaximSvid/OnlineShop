@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct ProjectWoche2Gr4App: App {
+    
+        
+//    @ObservedObject var productsViewModel: ProductsViewModel
     var body: some Scene {
         WindowGroup {
             AuthWrapper()
+                .modelContainer(for: [Products.self], inMemory: true)
         }
     }
 }

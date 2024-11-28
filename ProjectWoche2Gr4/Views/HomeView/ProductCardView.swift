@@ -5,23 +5,23 @@ import SwiftUI
 
 struct ProductCardView: View {
 //    @ObservedObject var homeViewModel:  HomeViewModel
+    @Environment(\.modelContext) private var context
+    @ObservedObject var productsViewModel: ProductsViewModel
+    @State var isLiked: Bool = false
+    var product: Products
+
     
-    var imageName: String
-    var title: String
-    var description: String
-    var rating: String
-    var price: String
+//    var imageName: String
+//    var title: String
+//    var description: String
+//    var rating: String
+//    var price: String
     
     var body: some View {
         ZStack(alignment: .topTrailing){
             ZStack (alignment: .bottom) {
-//                Image(imageName)
-//                    .resizable()
-//                    .clipShape(RoundedRectangle(cornerRadius: 10))
-//                    .frame(width: 180, height: 250)
-//                    .scaledToFit()
                 
-                AsyncImage (url: URL(string: imageName)) { image in
+                AsyncImage (url: URL(string: product.image)) { image in
                     image
                         .resizable()
                         .clipShape(RoundedRectangle(cornerRadius: 10))
@@ -34,12 +34,12 @@ struct ProductCardView: View {
                 
                 HStack() {
                     VStack (alignment: .leading) {
-                        Text(title)
+                        Text(product.title)
                             .font(.subheadline)
                             .foregroundColor(.black)
                             .padding(.bottom, 3)
                         
-                        Text(description)
+                        Text(product.descriptionProduct)
                             .font(.caption)
                             .foregroundColor(.black.opacity(0.8))
                     }
@@ -55,14 +55,14 @@ struct ProductCardView: View {
                             Image(systemName: "star.fill")
                                 .foregroundStyle(.yellow)
                                 .font(.caption)
-                            Text(rating)
+                            Text(String(format: "%.1f", product.rating.rate))
                                 .font(.caption)
                                 .foregroundColor(.black.opacity(0.8))
                                 .padding(.bottom, 3)
                         }
                         
                         
-                        Text(price)
+                        Text(String(format: "$%.2f", product.price))
                             .font(.subheadline)
                             .foregroundColor(.black.opacity(0.5))
                     }
@@ -73,16 +73,20 @@ struct ProductCardView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 10))
             }
             
-//            Button  {
-//                homeViewModel.isLiked.toggle()
-//            } label: {
-//                Image(systemName: "heart.fill")
-//                    .resizable()
-//                    .scaledToFit()
-//                    .frame(width: 25, height: 25)
-//                    .padding(10)
-//                    .foregroundStyle(homeViewModel.isLiked ? .red : .black)
-//            }
+            Button  {
+                if isLiked {
+                    productsViewModel.addToFavorite(product: product, context: context)
+                } else {
+                    productsViewModel.removeFromFavorite(product: product, context: context)
+                }
+            } label: {
+                Image(systemName: "heart.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 25, height: 25)
+                    .padding(10)
+                    .foregroundStyle(isLiked ? .red : .black)
+            }
             
             
         }
@@ -96,7 +100,7 @@ struct ProductCardView: View {
 
 
 #Preview {
-    ProductCardView(imageName: "image1", title: "Jacke Jack Wolfskin", description: "aasdfkl;jasdflkj ;lkasdfklj assdfsdfasdfasdf;ldkjflk;j lkasdf ", rating: "4.5", price: "$12.00")
+//    ProductCardView(imageName: "image1", title: "Jacke Jack Wolfskin", description: "aasdfkl;jasdflkj ;lkasdfklj assdfsdfasdfasdf;ldkjflk;j lkasdf ", rating: "4.5", price: "$12.00")
 }
 
 

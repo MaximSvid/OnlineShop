@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import SwiftData
 @MainActor
 class ProductsViewModel: ObservableObject {
+    @Query var favoriteProduct: [Products]
+    
     private var repo: ProductsRepository
     @Published var products: [Products] = []
     
@@ -20,19 +23,17 @@ class ProductsViewModel: ObservableObject {
     @Published var description: String = ""
     @Published var category: String = ""
     @Published var image: String = ""
-//    @Published var rating: Rating
+    @Published var rating: Rating?
     
-    func getProducts() {
-        Task {
-            do {
-                let fetchedProducts = try await repo.getProducts()
-                self.products = fetchedProducts
-                
-            } catch {
-                print(error)
-            }
+    func addToFavorite(product: Products, context: ModelContext) {
+        if !favoriteProduct.contains(where: { $0.id == product.id }) {
+            context.insert(product)
+            
         }
     }
     
+    func removeFromFavorite(product: Products, context: ModelContext) {
+        context.delete(product)
+    }
     
 }
