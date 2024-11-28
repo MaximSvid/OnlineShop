@@ -50,7 +50,7 @@ struct EndView: View {
                 Button(action: {
                     presentationMode.wrappedValue.dismiss()
                 }) {
-                    Text("Zurück")
+                    Text("Zurück 🏠")
                         .font(.headline)
                         .foregroundColor(.white)
                         .padding()
@@ -58,6 +58,8 @@ struct EndView: View {
                         .background(Color.black.opacity(0.8))
                         .cornerRadius(12)
                         .shadow(color: Color.black.opacity(0.4), radius: 8, x: 0, y: 4)
+                        
+                        
                 }
                 .padding(.horizontal, 40)
             }
