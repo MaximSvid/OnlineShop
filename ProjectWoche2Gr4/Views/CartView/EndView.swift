@@ -21,7 +21,6 @@ func generateQRCode(from string: String) -> UIImage? {
 
     return UIImage(cgImage: cgImage)
 }
-import SwiftUI
 
 // EndView
 struct EndView: View {
@@ -76,7 +75,7 @@ struct EndView: View {
                 Button(action: {
                     presentationMode.wrappedValue.dismiss()
                 }) {
-                    Text("Zurück 🏠")
+                    Text("Close")
                         .font(.headline)
                         .foregroundColor(.white)
                         .padding()
@@ -100,3 +99,4 @@ struct EndView_Previews: PreviewProvider {
         EndView(userInfo: "Name: Test User, Bank: 123456789")
     }
 }
+
