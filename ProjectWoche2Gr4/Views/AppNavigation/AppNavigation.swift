@@ -37,10 +37,4 @@ struct AppNavigation: View {
         .modelContainer(for: [Products.self], inMemory: true)
 }
 
-//struct AppNavigation_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AppNavigation(authViewModel: AuthViewModel(), productsViewModel: ProductsViewModel(repo: ProductsRepositoryImplementation()))
-//            .modelContainer(for: [Products.self], inMemory: true)
-//    }
-//}
 

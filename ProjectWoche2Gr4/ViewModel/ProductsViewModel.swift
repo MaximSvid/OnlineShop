@@ -43,9 +43,9 @@ class ProductsViewModel: ObservableObject {
         }
     }
     
-    func isFavorite(product: Products) -> Bool {
-            return products.contains { $0.id == product.id }
-        }
+//    func isFavorite(product: Products) -> Bool {
+//            return products.contains { $0.id == product.id }
+//        }
     
     
 }
