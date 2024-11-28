@@ -83,7 +83,7 @@ struct CategoryView: View {
                                 selectedCategory = category
                             }
                             filterByCategory()
-                        }
+                        }                        
                     }
                 }
                 .frame(height: 50)

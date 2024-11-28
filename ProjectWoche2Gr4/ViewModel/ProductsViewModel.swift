@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 @MainActor
 class ProductsViewModel: ObservableObject {
-    @Query var favoriteProduct: [Products]
+    //    @Query var favoriteProduct: [Products]
     
     private var repo: ProductsRepository
     @Published var products: [Products] = []
@@ -26,14 +26,26 @@ class ProductsViewModel: ObservableObject {
     @Published var rating: Rating?
     
     func addToFavorite(product: Products, context: ModelContext) {
-        if !favoriteProduct.contains(where: { $0.id == product.id }) {
-            context.insert(product)
-            
+        context.insert(product)
+        do {
+            try context.save()
+        } catch {
+            print("Failed to save product: \(error)")
         }
     }
     
     func removeFromFavorite(product: Products, context: ModelContext) {
         context.delete(product)
+        do {
+            try context.save()
+        } catch {
+            print("Failed to remove product: \(error)")
+        }
     }
+    
+    func isFavorite(product: Products) -> Bool {
+            return products.contains { $0.id == product.id }
+        }
+    
     
 }
