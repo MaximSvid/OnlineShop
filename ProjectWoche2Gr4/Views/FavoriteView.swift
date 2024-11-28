@@ -36,9 +36,11 @@ struct FavoriteView: View {
                             
                             VStack(alignment: .leading) {
                                 Text(product.title)
-                                    .font(.body)
+                                    .font(.body.bold())
+                                    .padding(.bottom,4)
                                 Text("$\(product.price, specifier: "%.2f")")
                                     .font(.footnote)
+                                    .foregroundStyle(.black.opacity(0.8))
                             }
                             
                             Spacer()
