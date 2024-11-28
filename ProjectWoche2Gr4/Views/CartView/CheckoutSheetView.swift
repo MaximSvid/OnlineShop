@@ -34,6 +34,8 @@ struct CheckoutSheetView: View {
                         .background(Color.black)
                         .cornerRadius(10)
                 }
+              
+                
 //                .alert(isPresented: $showAlert) {
 //                    Alert(
 //                        title: Text("Thank you!"),
@@ -44,6 +46,7 @@ struct CheckoutSheetView: View {
 //                    )
 //                }
             }
+            
             .navigationBarTitle("Checkout", displayMode: .inline)
             .navigationBarItems(trailing: Button("Close") {
                 presentationMode.wrappedValue.dismiss()
