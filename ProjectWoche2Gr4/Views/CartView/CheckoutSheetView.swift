@@ -12,6 +12,7 @@ struct CheckoutSheetView: View {
     @State private var phoneNumber: String = ""
     @State private var bankNumber: String = ""
     @State private var showAlert = false
+    @State private var showEndView = false
 
     var body: some View {
         NavigationView {
@@ -24,8 +25,8 @@ struct CheckoutSheetView: View {
                 }
 
                 Button(action: {
-                    // Hier können Sie die Eingaben validieren und verarbeiten
-                    showAlert = true
+                    let userInfo = "Name: \(phoneNumber), Bank: \(bankNumber)"
+                    showEndView = true
                 }) {
                     Text("Submit")
                         .foregroundColor(.white)
@@ -34,20 +35,14 @@ struct CheckoutSheetView: View {
                         .background(Color.black)
                         .cornerRadius(10)
                 }
-//                .alert(isPresented: $showAlert) {
-//                    Alert(
-//                        title: Text("Thank you!"),
-//                        message: Text("Thank you for your purchase!"),
-//                        dismissButton: .default(Text("OK"), action: {
-//                            presentationMode.wrappedValue.dismiss()
-//                        })
-//                    )
-//                }
             }
             .navigationBarTitle("Checkout", displayMode: .inline)
             .navigationBarItems(trailing: Button("Close") {
                 presentationMode.wrappedValue.dismiss()
             })
+            .fullScreenCover(isPresented: $showEndView) {
+                EndView(userInfo: "Name: \(phoneNumber), Bank: \(bankNumber)")
+            }
         }
     }
 }
