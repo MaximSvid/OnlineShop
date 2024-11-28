@@ -4,18 +4,10 @@
 import SwiftUI
 
 struct ProductCardView: View {
-//    @ObservedObject var homeViewModel:  HomeViewModel
     @Environment(\.modelContext) private var context
     @ObservedObject var productsViewModel: ProductsViewModel
     @State var isLiked: Bool = false
     var product: Products
-
-    
-//    var imageName: String
-//    var title: String
-//    var description: String
-//    var rating: String
-//    var price: String
     
     var body: some View {
         ZStack(alignment: .topTrailing){
@@ -44,14 +36,14 @@ struct ProductCardView: View {
                             .foregroundColor(.black.opacity(0.8))
                     }
                     .frame(height: 50)
-
+                    
                     
                     Spacer()
                     
                     VStack (alignment: .trailing) {
                         
                         HStack {
-  
+                            
                             Image(systemName: "star.fill")
                                 .foregroundStyle(.yellow)
                                 .font(.caption)
@@ -74,6 +66,7 @@ struct ProductCardView: View {
             }
             
             Button  {
+                isLiked.toggle()
                 if isLiked {
                     productsViewModel.addToFavorite(product: product, context: context)
                 } else {
@@ -90,17 +83,17 @@ struct ProductCardView: View {
             
             
         }
-//        .frame(width: 180, height: 250)
+        //        .frame(width: 180, height: 250)
         .frame(maxWidth: 180, maxHeight: 250)
         .background(.gray.opacity(0.1))
         .clipShape(RoundedRectangle(cornerRadius: 10))
-//        .shadow(color: .gray, radius: 3)
+        //        .shadow(color: .gray, radius: 3)
     }
 }
 
 
 #Preview {
-//    ProductCardView(imageName: "image1", title: "Jacke Jack Wolfskin", description: "aasdfkl;jasdflkj ;lkasdfklj assdfsdfasdfasdf;ldkjflk;j lkasdf ", rating: "4.5", price: "$12.00")
+    //    ProductCardView(imageName: "image1", title: "Jacke Jack Wolfskin", description: "aasdfkl;jasdflkj ;lkasdfklj assdfsdfasdfasdf;ldkjflk;j lkasdf ", rating: "4.5", price: "$12.00")
 }
 
 
