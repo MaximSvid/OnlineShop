@@ -10,12 +10,10 @@ import SwiftData
 
 struct FavoriteView: View {
     @Environment(\.modelContext) private var context
-//    @Query(sort: \Products.title) private var favoriteProducts: [Products]
     @ObservedObject var productsViewModel: ProductsViewModel
     
-    @State private var sortOption: SortOption = .title
-    
     // sort
+    @State private var sortOption: SortOption = .title
     
     @Query(sort: \Products.price) private var productsByName: [Products]
     @Query(sort: \Products.price) private var productsByPrice: [Products]
@@ -85,6 +83,7 @@ struct FavoriteView: View {
                                     .font(.footnote)
                                     .foregroundStyle(.red)
                             }
+                            .buttonStyle(BorderedButtonStyle())
                         }
                     }
                 }
