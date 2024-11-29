@@ -117,14 +117,14 @@ struct CheckoutSheetView: View {
                             )
                         }
                     }
-                    .padding(.horizontal)
-                    
-                    
+                    .scrollContentBackground(.hidden)// das ist
+                    .padding()
+                    .cornerRadius(12)
 
                     // Submit-Button
                     Button(action: {
                         let formattedBirthdate = formatDate(birthdate)
-                        let userInfo = "Name: \(name), Phone: \(phoneNumber), Bank: \(bankNumber), Birthdate: \(formattedBirthdate), Address: \(address)"
+                        _ = "Name: \(name), Phone: \(phoneNumber), Bank: \(bankNumber), Birthdate: \(formattedBirthdate), Address: \(address)"
                         showEndView = true
                     }) {
                         Text("Submit")
@@ -141,6 +141,8 @@ struct CheckoutSheetView: View {
                 }
                 .padding(.bottom, 20)
             }
+            
+          
             .navigationBarTitle("Checkout", displayMode: .inline)
             .navigationBarItems(trailing: Button("Close") {
                 presentationMode.wrappedValue.dismiss()
