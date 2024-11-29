@@ -49,7 +49,7 @@ struct HomeDetailView: View {
 
             // Produktbeschreibung
             VStack(alignment: .leading, spacing: 8) {
-                Text(product.description)
+                Text(product.descriptionProduct)
                     .font(.body)
                     .foregroundColor(.gray)
             }
