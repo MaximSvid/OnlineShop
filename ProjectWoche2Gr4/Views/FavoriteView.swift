@@ -27,7 +27,7 @@ struct FavoriteView: View {
     var displayedProducts: [Products] {
             switch sortOption {
             case .title:
-                return productsByName
+                return productsByName.sorted { $0.title < $1.title }
             case .price:
                 return productsByPrice
             case .rating:
@@ -81,7 +81,7 @@ struct FavoriteView: View {
                                 
                                 Image(systemName: "trash")
                                     .font(.footnote)
-                                    .foregroundStyle(.red)
+                                    .foregroundStyle(.black)
                             }
                             .buttonStyle(BorderedButtonStyle())
                         }

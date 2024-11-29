@@ -18,7 +18,7 @@ struct HomeView: View {
             }
             .searchable(text: $homeViewModel.searchText, isPresented: $homeViewModel.isSearchVisible, placement: .automatic)
             .task {
-                await homeViewModel.getProducts()
+                homeViewModel.getProducts()
             }
             .padding([.leading, .trailing])
         }
@@ -110,7 +110,7 @@ struct ProductGridView: View {
 
             LazyVGrid(columns: columns, spacing: 15) {
                 ForEach(products) { product in
-                    NavigationLink(destination: HomeDetailView(product: product, cartViewModel: cartViewModel)) {
+                    NavigationLink(destination: HomeDetailView(product: product, cartViewModel: cartViewModel, productsViewModel: productsViewModel)) {
                         ProductCardView(productsViewModel: productsViewModel, product: product)
                     }
                 }

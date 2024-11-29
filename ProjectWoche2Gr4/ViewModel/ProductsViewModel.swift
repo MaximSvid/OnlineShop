@@ -61,8 +61,5 @@ class ProductsViewModel: ObservableObject {
             }
             return false
         }
-    
-   
-    
-    
+  
 }
