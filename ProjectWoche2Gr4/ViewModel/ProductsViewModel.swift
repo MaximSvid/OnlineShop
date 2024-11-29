@@ -11,8 +11,10 @@ import SwiftData
 class ProductsViewModel: ObservableObject {
     //    @Query var favoriteProduct: [Products]
     
+    
     private var repo: ProductsRepository
     @Published var products: [Products] = []
+    @Published var favoriteProducts: [Products] = []
     
     init(repo: ProductsRepository) {
         self.repo = repo
@@ -25,7 +27,10 @@ class ProductsViewModel: ObservableObject {
     @Published var image: String = ""
     @Published var rating: Rating?
     
+    @Published var isFavorite: Bool = false
+    
     func addToFavorite(product: Products, context: ModelContext) {
+        product.isFavorite = true
         context.insert(product)
         do {
             try context.save()
@@ -35,6 +40,7 @@ class ProductsViewModel: ObservableObject {
     }
     
     func removeFromFavorite(product: Products, context: ModelContext) {
+        product.isFavorite = false
         context.delete(product)
         do {
             try context.save()
@@ -43,9 +49,20 @@ class ProductsViewModel: ObservableObject {
         }
     }
     
-//    func isFavorite(product: Products) -> Bool {
-//            return products.contains { $0.id == product.id }
-//        }
+    func loadFavoriteStatus(product: Products, context: ModelContext) -> Bool {
+            let fetchDescriptor = FetchDescriptor<Products>(predicate: #Predicate { $0.id == product.id })
+            do {
+                let results = try context.fetch(fetchDescriptor)
+                if let fetchedProduct = results.first {
+                    return fetchedProduct.isFavorite
+                }
+            } catch {
+                print("Failed to load favorite status: \(error)")
+            }
+            return false
+        }
+    
+   
     
     
 }

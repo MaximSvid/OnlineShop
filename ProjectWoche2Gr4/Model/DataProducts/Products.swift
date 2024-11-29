@@ -17,6 +17,8 @@ class Products: Codable, Identifiable {
     var category: String
     var image: String
     var rating: Rating
+    
+    var isFavorite: Bool = false
    
     
     enum CodingKeys: String, CodingKey {

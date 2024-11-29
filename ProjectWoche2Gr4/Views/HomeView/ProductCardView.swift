@@ -6,7 +6,8 @@ import SwiftUI
 struct ProductCardView: View {
     @Environment(\.modelContext) private var context
     @ObservedObject var productsViewModel: ProductsViewModel
-    @State var isLiked: Bool = false
+    @State private var isFavorite: Bool = false
+    //    @State var isLiked: Bool = false
     var product: Products
     
     var body: some View {
@@ -65,24 +66,28 @@ struct ProductCardView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 10))
             }
             
-            Button  {
-                isLiked.toggle()
-                if isLiked {
+            Button(action: {
+                isFavorite.toggle()
+                if isFavorite {
                     productsViewModel.addToFavorite(product: product, context: context)
                 } else {
                     productsViewModel.removeFromFavorite(product: product, context: context)
                 }
-            } label: {
-                Image(systemName: "heart.fill")
+            }) {
+                Image(systemName: isFavorite ? "heart.fill" : "heart")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 25, height: 25)
                     .padding(10)
-                    .foregroundStyle(isLiked ? .red : .black)
+                    .foregroundStyle(isFavorite ? .red : .black)
             }
             
             
         }
+        .onAppear {
+            isFavorite = productsViewModel.loadFavoriteStatus(product: product, context: context)
+        }
+        
         //        .frame(width: 180, height: 250)
         .frame(maxWidth: 180, maxHeight: 250)
         .background(.gray.opacity(0.1))
