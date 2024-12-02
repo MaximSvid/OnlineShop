@@ -117,7 +117,7 @@ struct CheckoutSheetView: View {
                             )
                         }
                     }
-                    .scrollContentBackground(.hidden)// das ist
+                    .scrollContentBackground(.hidden)// das ist war
                     .padding()
                     .cornerRadius(12)
 
@@ -143,7 +143,7 @@ struct CheckoutSheetView: View {
             }
             
           
-            .navigationBarTitle("Checkout", displayMode: .inline)
+          //  .navigationBarTitle("Checkout", displayMode: .inline)
             .navigationBarItems(trailing: Button("Close") {
                 presentationMode.wrappedValue.dismiss()
             })
