@@ -25,15 +25,6 @@ struct HomeView: View {
     }
 }
 
-
-
-
-
-
-
-
-
-
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView(homeViewModel: HomeViewModel(repo: ProductsRepositoryImplementation()), cartViewModel: CartViewModel(), productsViewModel: ProductsViewModel(repo: ProductsRepositoryImplementation()))
