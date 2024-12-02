@@ -52,22 +52,6 @@ class AuthViewModel: ObservableObject { // ich beobachte hier ob der User eingel
             loginError = "Error fetching users: \(error)"
         }
     }
-//    func login(context: ModelContext) {
-//        if authModel.validateCredentials() {
-//            user = User(username: usernameInput, password: passwordInput)
-//            isLoggedIn = true
-//            loginError = ""
-//        } else {
-//            loginError = "Invalid username or password"
-//        }
-//    }
-//
-//    func register(context: ModelContext) {
-//        // Hier Registrierung abfertigen
-//        user = User(username: usernameInput, password: passwordInput)
-//        isLoggedIn = true
-//        loginError = ""
-//    }
 
     func logout() {
         isLoggedIn = false

@@ -15,7 +15,7 @@ struct ProjectWoche2Gr4App: App {
     var body: some Scene {
         WindowGroup {
             AuthWrapper()
-                .modelContainer(for: [Products.self], inMemory: true)
+                .modelContainer(for: [Products.self, User.self], inMemory: true)
         }
     }
 }

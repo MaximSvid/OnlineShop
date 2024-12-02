@@ -5,7 +5,7 @@ struct HomeView: View {
     @ObservedObject var cartViewModel: CartViewModel
     @ObservedObject var productsViewModel: ProductsViewModel
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
-
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -25,32 +25,39 @@ struct HomeView: View {
     }
 }
 
-// BannerView Component
+
 struct BannerView: View {
     let images: [String]
-
+    @State private var currentIndex: Int = 0
+    private let timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
+    
     var body: some View {
-        TabView {
-            ForEach(images, id: \.self) { image in
-                Image(image)
+        TabView(selection: $currentIndex) {
+            ForEach(images.indices, id: \.self) { index in
+                Image(images[index])
                     .resizable()
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     .scaledToFit()
-                    .frame(height: 290)
+                    .frame(width: .infinity, height: 290)
                     .clipped()
+                    .tag(index)
             }
         }
         .tabViewStyle(PageTabViewStyle())
         .frame(height: 150)
+        .onReceive(timer) { _ in
+            withAnimation {
+                currentIndex = (currentIndex + 1) % images.count
+            }
+        }
     }
 }
 
-// CategoryView Component
 struct CategoryView: View {
     let categories: [Category]
     @Binding var selectedCategory: Category?
     let filterByCategory: () -> Void
-
+    
     var body: some View {
         VStack {
             HStack {
@@ -58,7 +65,7 @@ struct CategoryView: View {
                     .font(.headline)
                 Spacer()
             }
-
+            
             ScrollView(.horizontal) {
                 HStack(spacing: 10) {
                     ForEach(categories, id: \.self) { category in
@@ -67,7 +74,7 @@ struct CategoryView: View {
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 30, height: 30)
-
+                            
                             Text(category.title)
                                 .font(.caption)
                         }
@@ -83,7 +90,7 @@ struct CategoryView: View {
                                 selectedCategory = category
                             }
                             filterByCategory()
-                        }                        
+                        }
                     }
                 }
                 .frame(height: 50)
@@ -93,13 +100,13 @@ struct CategoryView: View {
     }
 }
 
-// ProductGridView Component
+
 struct ProductGridView: View {
     let columns: [GridItem]
     let products: [Products]
     @ObservedObject var productsViewModel: ProductsViewModel
     @ObservedObject var cartViewModel: CartViewModel
-
+    
     var body: some View {
         VStack {
             HStack {
@@ -107,7 +114,7 @@ struct ProductGridView: View {
                     .font(.headline)
                 Spacer()
             }
-
+            
             LazyVGrid(columns: columns, spacing: 15) {
                 ForEach(products) { product in
                     NavigationLink(destination: HomeDetailView(product: product, cartViewModel: cartViewModel, productsViewModel: productsViewModel)) {
@@ -119,12 +126,11 @@ struct ProductGridView: View {
     }
 }
 
-// ToolbarItems Component
 struct ToolbarItems: ToolbarContent {
     @Binding var isSearchVisible: Bool
     @Binding var searchText: String
     let toggleSearch: () -> Void
-
+    
     var body: some ToolbarContent {
         ToolbarItemGroup(placement: .navigationBarTrailing) {
             Button {
@@ -134,7 +140,7 @@ struct ToolbarItems: ToolbarContent {
                     .foregroundStyle(.gray)
             }
         }
-
+        
         ToolbarItemGroup(placement: .navigationBarLeading) {
             Text("HomeView")
                 .font(.title.bold())
@@ -143,7 +149,7 @@ struct ToolbarItems: ToolbarContent {
     }
 }
 
-// Preview
+
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView(homeViewModel: HomeViewModel(repo: ProductsRepositoryImplementation()), cartViewModel: CartViewModel(), productsViewModel: ProductsViewModel(repo: ProductsRepositoryImplementation()))
