@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct AuthView: View {
+    @Environment(\.modelContext) private var context
     @ObservedObject var authViewModel: AuthViewModel
 
     var body: some View {
@@ -42,7 +43,7 @@ struct AuthView: View {
                 .padding(.horizontal)
 
             Button(action: {
-                authViewModel.login()
+                authViewModel.login(context: context)
             }) {
                 Text("Sign In")
                     .padding()
@@ -81,7 +82,7 @@ struct AuthView: View {
                 .padding(.horizontal)
 
             Button(action: {
-                authViewModel.register()
+                authViewModel.register(context: context)
             }) {
                 Text("Sign Up")
                     .padding()
