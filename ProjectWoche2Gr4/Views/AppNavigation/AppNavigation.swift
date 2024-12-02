@@ -26,6 +26,7 @@ struct AppNavigation: View {
                 SettingView(authViewModel: authViewModel)
             }
         }
+        .accentColor(.black) 
     }
 }
 
