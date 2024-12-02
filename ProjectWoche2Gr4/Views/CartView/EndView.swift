@@ -25,6 +25,7 @@ func generateQRCode(from string: String) -> UIImage? {
 // EndView
 struct EndView: View {
     @Environment(\.presentationMode) var presentationMode
+    @ObservedObject var cartViewModel: CartViewModel
     var userInfo: String
     @State private var qrCodeImage: UIImage? = nil
 
@@ -73,6 +74,7 @@ struct EndView: View {
 
                 // Zurück-Button
                 Button(action: {
+                    cartViewModel.clearCart()
                     presentationMode.wrappedValue.dismiss()
                 }) {
                     Text("Close")
@@ -85,7 +87,6 @@ struct EndView: View {
                         .shadow(color: Color.black.opacity(0.4), radius: 8, x: 0, y: 4)
                 }
                 .padding(.horizontal, 40)
-                
             }
             .padding()
         }
@@ -97,7 +98,7 @@ struct EndView: View {
 
 struct EndView_Previews: PreviewProvider {
     static var previews: some View {
-        EndView(userInfo: "Name: Test User, Bank: 123456789")
+        EndView(cartViewModel: CartViewModel(), userInfo: "Name: Test User, Bank: 123456789")
     }
 }
 
