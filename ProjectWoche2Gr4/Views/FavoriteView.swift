@@ -11,30 +11,31 @@ import SwiftData
 struct FavoriteView: View {
     @Environment(\.modelContext) private var context
     @ObservedObject var productsViewModel: ProductsViewModel
+    @ObservedObject var cartViewModel: CartViewModel
     
     // sort
     @State private var sortOption: SortOption = .title
     
     @Query(sort: \Products.price) private var productsByName: [Products]
-
     
     
-   
+    
+    
     
     var displayedProducts: [Products] {
-            switch sortOption {
-            case .title:
-                return productsByName.sorted { $0.title < $1.title }
-            case .price:
-                return productsByName
-            case .rating:
-                return productsByName.sorted { $0.rating.rate > $1.rating.rate }
-            case .category:
-                return productsByName.sorted { $0.category < $1.category }
-            case .reviews:
-                return productsByName.sorted { $0.rating.count > $1.rating.count }
-            }
+        switch sortOption {
+        case .title:
+            return productsByName.sorted { $0.title < $1.title }
+        case .price:
+            return productsByName
+        case .rating:
+            return productsByName.sorted { $0.rating.rate > $1.rating.rate }
+        case .category:
+            return productsByName.sorted { $0.category < $1.category }
+        case .reviews:
+            return productsByName.sorted { $0.rating.count > $1.rating.count }
         }
+    }
     
     
     
@@ -48,39 +49,48 @@ struct FavoriteView: View {
                         .font(.headline)
                 } else {
                     List (displayedProducts) {product in
-                        HStack {
-                            AsyncImage(url: URL(string: product.image)) {
-                                image in
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 80, height: 80)
-                                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                            } placeholder: {
-                                Color.gray.frame(width: 80, height: 80)
-                            }
+                        
+                        NavigationLink(destination: HomeDetailView(
+                            product: product,
+                            cartViewModel: cartViewModel,
+                            productsViewModel: productsViewModel)
+                        ) {
                             
-                            VStack(alignment: .leading) {
-                                Text(product.title)
-                                    .font(.body.bold())
-                                    .padding(.bottom,4)
-                                Text("$\(product.price, specifier: "%.2f")")
-                                    .font(.footnote)
-                                    .foregroundStyle(.black.opacity(0.8))
-                            }
-                            
-                            Spacer()
-                            
-                            Button(action: {
-                                productsViewModel.removeFromFavorite(product: product, context: context)
+                            HStack {
+                                AsyncImage(url: URL(string: product.image)) {
+                                    image in
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 80, height: 80)
+                                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                                } placeholder: {
+                                    Color.gray.frame(width: 80, height: 80)
+                                }
                                 
-                            }) {
+                                VStack(alignment: .leading) {
+                                    Text(product.title)
+                                        .font(.body.bold())
+                                        .padding(.bottom,4)
+                                    Text("$\(product.price, specifier: "%.2f")")
+                                        .font(.footnote)
+                                        .foregroundStyle(.black.opacity(0.8))
+                                }
                                 
-                                Image(systemName: "trash")
-                                    .font(.footnote)
-                                    .foregroundStyle(.black)
+                                Spacer()
+                                
+                                Button(action: {
+                                    productsViewModel.removeFromFavorite(product: product, context: context)
+                                    
+                                }) {
+                                    
+                                    Image(systemName: "trash")
+                                        .font(.footnote)
+                                        .foregroundStyle(.black)
+                                }
+                                .buttonStyle(BorderedButtonStyle())
                             }
-                            .buttonStyle(BorderedButtonStyle())
+                            
                         }
                     }
                 }

@@ -19,7 +19,7 @@ struct AppNavigation: View {
             .badge(cartViewModel.cartItems.count)
 
             Tab("Favorite", systemImage: "star.fill") {
-                FavoriteView(productsViewModel: productsViewModel)
+                FavoriteView(productsViewModel: productsViewModel, cartViewModel: cartViewModel)
             }
 
             Tab("Setting", systemImage: "gearshape.fill") {
