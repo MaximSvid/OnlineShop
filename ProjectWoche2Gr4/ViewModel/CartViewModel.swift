@@ -4,6 +4,7 @@
 //
 //  Created by Hamzah on 27.11.24.
 //
+
 import SwiftUI
 import Combine
 
@@ -31,6 +32,10 @@ class CartViewModel: ObservableObject {
 
     var total: Double {
         cartItems.reduce(0) { $0 + $1.product.price * Double($1.quantity) }
+    }
+
+    func clearCart() {
+        cartItems.removeAll()
     }
 }
 

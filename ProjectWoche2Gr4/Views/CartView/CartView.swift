@@ -104,7 +104,7 @@ struct CartView: View {
         }
         .background(Color.white)
         .sheet(isPresented: $showingCheckoutSheet) {
-            CheckoutSheetView()
+            CheckoutSheetView(cartViewModel: cartViewModel)
         }
     }
 }
@@ -114,4 +114,3 @@ struct CartView_Previews: PreviewProvider {
         CartView(cartViewModel: CartViewModel())
     }
 }
-
