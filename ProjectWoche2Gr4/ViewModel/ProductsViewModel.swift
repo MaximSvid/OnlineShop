@@ -9,8 +9,6 @@ import SwiftUI
 import SwiftData
 @MainActor
 class ProductsViewModel: ObservableObject {
-    //    @Query var favoriteProduct: [Products]
-    
     
     private var repo: ProductsRepository
     @Published var products: [Products] = []

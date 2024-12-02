@@ -26,6 +26,7 @@ struct AppNavigation: View {
                 SettingView(authViewModel: authViewModel)
             }
         }
+        .accentColor(.black) 
     }
 }
 
@@ -34,7 +35,7 @@ struct AppNavigation: View {
     let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
     let container = try! ModelContainer(for: Products.self, configurations: configuration)
     AppNavigation(authViewModel: AuthViewModel(), productsViewModel: ProductsViewModel(repo: ProductsRepositoryImplementation()))
-        .modelContainer(for: [Products.self], inMemory: true)
+        .modelContainer(for: [Products.self, User.self], inMemory: true)
 }
 
 

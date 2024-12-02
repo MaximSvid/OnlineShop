@@ -16,10 +16,7 @@ struct FavoriteView: View {
     @State private var sortOption: SortOption = .title
     
     @Query(sort: \Products.price) private var productsByName: [Products]
-    @Query(sort: \Products.price) private var productsByPrice: [Products]
-    @Query(sort: \Products.price) private var productsByRating: [Products]
-    @Query(sort: \Products.price) private var productsByCategory: [Products]
-    @Query(sort: \Products.price) private var productsByReviews: [Products]
+
     
     
    
@@ -29,7 +26,7 @@ struct FavoriteView: View {
             case .title:
                 return productsByName.sorted { $0.title < $1.title }
             case .price:
-                return productsByPrice
+                return productsByName
             case .rating:
                 return productsByName.sorted { $0.rating.rate > $1.rating.rate }
             case .category:
