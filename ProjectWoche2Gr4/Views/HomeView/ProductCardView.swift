@@ -7,7 +7,6 @@ struct ProductCardView: View {
     @Environment(\.modelContext) private var context
     @ObservedObject var productsViewModel: ProductsViewModel
     @State private var isFavorite: Bool = false
-    //    @State var isLiked: Bool = false
     var product: Products
     
     var body: some View {
