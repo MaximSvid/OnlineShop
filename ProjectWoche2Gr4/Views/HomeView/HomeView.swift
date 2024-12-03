@@ -17,9 +17,9 @@ struct HomeView: View {
                 ToolbarItems(isSearchVisible: $homeViewModel.isSearchVisible, searchText: $homeViewModel.searchText, toggleSearch: { homeViewModel.isSearchVisible.toggle() })
             }
             .searchable(text: $homeViewModel.searchText, isPresented: $homeViewModel.isSearchVisible, placement: .automatic)
-            .task {
-                homeViewModel.getProducts()
-            }
+//            .task {
+//                homeViewModel.getProducts()
+//            }
             .padding([.leading, .trailing])
         }
     }

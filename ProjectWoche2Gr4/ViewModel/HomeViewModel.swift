@@ -32,6 +32,7 @@ class HomeViewModel: ObservableObject {
                         self?.filterProducts()
                     }
                     .store(in: &cancellables)
+        getProducts()
        
     }
     

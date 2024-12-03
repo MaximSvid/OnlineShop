@@ -96,15 +96,15 @@ struct HomeDetailView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
-                    isFavorite.toggle()
-                    if isFavorite {
+                    product.isFavorite.toggle()
+                    if product.isFavorite {
                         productsViewModel.addToFavorite(product: product, context: context)
                     } else {
                         productsViewModel.removeFromFavorite(product: product, context: context)
                     }
                 }) {
-                    Image(systemName: isFavorite ? "heart.fill" : "heart")
-                        .foregroundColor(isFavorite ? .red : .black)
+                    Image(systemName: product.isFavorite ? "heart.fill" : "heart")
+                        .foregroundColor(product.isFavorite ? .red : .black)
                 }
             }
         }

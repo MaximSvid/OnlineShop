@@ -66,26 +66,26 @@ struct ProductCardView: View {
             }
             
             Button(action: {
-                isFavorite.toggle()
-                if isFavorite {
+                product.isFavorite.toggle()
+                if  product.isFavorite {
                     productsViewModel.addToFavorite(product: product, context: context)
                 } else {
                     productsViewModel.removeFromFavorite(product: product, context: context)
                 }
             }) {
-                Image(systemName: isFavorite ? "heart.fill" : "heart")
+                Image(systemName:  product.isFavorite ? "heart.fill" : "heart")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 25, height: 25)
                     .padding(10)
-                    .foregroundStyle(isFavorite ? .red : .black)
+                    .foregroundStyle( product.isFavorite ? .red : .black)
             }
             
             
         }
-        .onAppear {
-            isFavorite = productsViewModel.loadFavoriteStatus(product: product, context: context)
-        }
+//        .onAppear {
+//            product.isFavorite = productsViewModel.loadFavoriteStatus(product: product, context: context)
+//        }
         
         //        .frame(width: 180, height: 250)
         .frame(maxWidth: 180, maxHeight: 250)

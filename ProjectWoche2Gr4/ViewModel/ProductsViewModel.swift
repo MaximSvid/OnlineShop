@@ -40,11 +40,11 @@ class ProductsViewModel: ObservableObject {
     func removeFromFavorite(product: Products, context: ModelContext) {
         product.isFavorite = false
         context.delete(product)
-        do {
-            try context.save()
-        } catch {
-            print("Failed to remove product: \(error)")
-        }
+//        do {
+//            try context.save()
+//        } catch {
+//            print("Failed to remove product: \(error)")
+//        }
     }
     
     func loadFavoriteStatus(product: Products, context: ModelContext) -> Bool {
